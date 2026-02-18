@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>섹션 8 — 이미지4 보완판</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Black+Han+Sans&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #0a0a0a; overflow-x: hidden; }
+
+/* ─────────────────────────────────
+   선택 근거 배너
+───────────────────────────────── */
+.pick-bar {
+  background: #161616;
+  border-bottom: 1px solid #252525;
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.pick-badge {
+  background: #e03a2f;
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 5px 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+.pick-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.55;
+}
+.pick-text strong { color: rgba(255,255,255,0.9); }
+
+/* ─────────────────────────────────
+   상단 헤더
+───────────────────────────────── */
+.sec-header {
+  background: #0a0a0a;
+  text-align: center;
+  padding: 72px 24px 52px;
+  position: relative;
+  z-index: 1;
+}
+.header-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: #444;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.header-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(34px, 5vw, 60px);
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.header-title em { font-style: normal; color: #4d9eff; }
+
+/* ✅ 보완: 변화 요약 한 줄 (이미지4엔 없었음) */
+.header-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+}
+.sum-arrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sum-before { color: #e87060; font-weight: 600; }
+.sum-after  { color: #4d9eff; font-weight: 600; }
+.sum-icon   { font-size: 16px; opacity: 0.5; }
+
+/* ─────────────────────────────────
+   풀스크린 분할 (이미지4 핵심)
+───────────────────────────────── */
+.split-scene {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+  position: relative;
+}
+
+/* 중앙 분리선 + 라벨 */
+.split-center-line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #0a0a0a, #fff, #0a0a0a);
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.split-center-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 14px;
+  color: #0a0a0a;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  z-index: 11;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+/* ── BEFORE 왼쪽 ── */
+.col-before {
+  background: #0e0808;
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+/* 배경 노이즈 */
+.col-before::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent 0, transparent 30px,
+    rgba(200,60,40,0.025) 30px, rgba(200,60,40,0.025) 31px
+  );
+  pointer-events: none;
+}
+
+.before-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #e87060;
+  background: rgba(232,112,96,0.1);
+  border: 1px solid rgba(232,112,96,0.25);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.col-before-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(24px, 3vw, 38px);
+  color: rgba(255,255,255,0.45);
+  line-height: 1.2;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  text-decoration: line-through;
+  text-decoration-color: rgba(232,112,96,0.35);
+}
+
+/* ✅ 보완: 피규어 이모지 혼돈 씬 → 더 극적으로 */
+.chaos-scene {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✅ 보완: X 오버레이 워터마크 */
+.chaos-scene::after {
+  content: '✕';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+  color: rgba(232,112,96,0.06);
+  font-weight: 900;
+  pointer-events: none;
+}
+
+.chaos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  width: 100%;
+}
+.c-fig { font-size: 26px; text-align: center; display: block; opacity: 0.45; }
+.c-fig:nth-child(1) { transform: rotate(-22deg) translateY(10px); }
+.c-fig:nth-child(2) { transform: rotate(14deg) translateY(-8px); }
+.c-fig:nth-child(3) { transform: rotate(-8deg) translateY(14px); }
+.c-fig:nth-child(4) { transform: rotate(26deg) translateY(4px); }
+.c-fig:nth-child(5) { transform: rotate(-17deg) translateY(-6px); }
+.c-fig:nth-child(6) { transform: rotate(9deg) translateY(12px); }
+.c-fig:nth-child(7) { transform: rotate(-28deg) translateY(-10px); }
+.c-fig:nth-child(8) { transform: rotate(19deg) translateY(6px); }
+
+.before-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+/* ✅ 보완: 문제 태그 강조색 추가 */
+.problem-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+.prob-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: rgba(232,112,96,0.1);
+  color: rgba(232,112,96,0.65);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(232,112,96,0.15);
+}
+
+/* ── AFTER 오른쪽 ── */
+.col-after {
+  background: #f4f8ff;
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 오른쪽 배경 패턴 */
+.col-after::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent 0, transparent 40px,
+    rgba(77,158,255,0.03) 40px, rgba(77,158,255,0.03) 41px
+  );
+  pointer-events: none;
+}
+
+.after-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #1a4cdb;
+  background: rgba(26,76,219,0.08);
+  border: 1px solid rgba(26,76,219,0.2);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.col-after-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(24px, 3vw, 38px);
+  color: #0a1a3e;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.col-after-title span { color: #1a4cdb; }
+
+/* ✅ 보완: AFTER 씬 → LED 글로우 연출 */
+.order-scene {
+  background: #0a1a3e;
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* LED 상단 바 */
+.led-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 5%, rgba(77,158,255,0.4) 20%,
+    #4d9eff 50%, rgba(77,158,255,0.4) 80%, transparent 95%
+  );
+  box-shadow: 0 0 14px rgba(77,158,255,0.6);
+}
+
+.ordered-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: center;
+}
+.o-fig {
+  font-size: 34px;
+  filter: drop-shadow(0 0 8px rgba(77,158,255,0.5));
+  animation: glow-float 3s ease-in-out infinite;
+}
+.o-fig:nth-child(1) { animation-delay: 0.0s; }
+.o-fig:nth-child(2) { animation-delay: 0.3s; }
+.o-fig:nth-child(3) { animation-delay: 0.6s; }
+.o-fig:nth-child(4) { animation-delay: 0.9s; }
+.o-fig:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes glow-float {
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 6px rgba(77,158,255,0.4)); }
+  50%       { transform: translateY(-5px); filter: drop-shadow(0 0 12px rgba(77,158,255,0.7)); }
+}
+
+/* LED 라벨 */
+.led-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(77,158,255,0.6);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.after-desc {
+  font-size: 13px;
+  color: #4a5a7a;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+/* ✅ 보완: 결과 태그 */
+.result-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+.res-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: rgba(26,76,219,0.08);
+  color: #1a4cdb;
+  border: 1px solid rgba(26,76,219,0.18);
+}
+
+/* ─────────────────────────────────
+   하단 변화 카드 (이미지4 원본)
+───────────────────────────────── */
+.change-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: #1a1a1a;
+}
+
+.change-card {
+  padding: 28px 36px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.change-card.before-card { background: #0e0808; }
+.change-card.after-card  { background: #f4f8ff; }
+
+.change-emoji { font-size: 28px; flex-shrink: 0; }
+.change-content {}
+
+.change-title {
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.before-card .change-title { color: #e87060; }
+.after-card  .change-title { color: #1a4cdb; }
+
+.change-desc {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.before-card .change-desc { color: rgba(255,255,255,0.45); }
+.after-card  .change-desc { color: #4a5a7a; }
+
+/* ✅ 보완: 변화 수치 태그 */
+.change-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+.before-card .change-metric {
+  background: rgba(232,112,96,0.1);
+  color: rgba(232,112,96,0.8);
+  border: 1px solid rgba(232,112,96,0.15);
+}
+.after-card .change-metric {
+  background: rgba(26,76,219,0.1);
+  color: #1a4cdb;
+  border: 1px solid rgba(26,76,219,0.15);
+}
+
+/* ─────────────────────────────────
+   ✅ 보완: 변화 요약 배너
+───────────────────────────────── */
+.summary-bar {
+  background: #0a1a3e;
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.summary-text {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(17px, 2.2vw, 22px);
+  color: #fff;
+  line-height: 1.45;
+}
+.summary-text span { color: #4d9eff; }
+.summary-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.summary-cta {
+  background: #4d9eff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 14px 30px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.summary-cta:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 28px rgba(77,158,255,0.4);
+}
+
+/* ─────────────────────────────────
+   보완 메모
+───────────────────────────────── */
+.memo-wrap {
+  background: #f8f6f3;
+  padding: 52px 40px;
+}
+.memo-inner { max-width: 960px; margin: 0 auto; }
+
+.memo-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.memo-bar::before { content: ''; width: 28px; height: 2px; background: #f59e0b; }
+.memo-bar-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #b45309;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* 선택 이유 */
+.select-box {
+  background: #fffbf0;
+  border: 1.5px solid #f59e0b;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.select-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #92400e;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.select-body {
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.8;
+}
+.select-body strong { color: #0e0e0e; font-weight: 700; }
+
+/* 보완 그리드 */
+.improve-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.improve-card {
+  background: #fff;
+  border: 1.5px solid #e5ddd0;
+  border-radius: 14px;
+  padding: 22px 22px 22px 20px;
+  border-left: 4px solid #f59e0b;
+}
+.improve-card:hover { box-shadow: 0 4px 16px rgba(245,158,11,0.12); }
+.imp-no    { font-family: 'DM Mono', monospace; font-size: 10px; color: #d97706; letter-spacing: 0.12em; margin-bottom: 6px; }
+.imp-title { font-size: 14px; font-weight: 900; color: #0e0e0e; margin-bottom: 6px; }
+.imp-body  { font-size: 12px; color: #6b5c48; line-height: 1.72; }
+.imp-body em { font-style: normal; color: #92400e; font-weight: 600; }
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .split-scene { grid-template-columns: 1fr; }
+  .split-center-line, .split-center-label { display: none; }
+  .change-cards { grid-template-columns: 1fr; }
+  .improve-grid { grid-template-columns: 1fr; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .pick-bar { padding: 12px 16px; }
+  .memo-wrap { padding: 40px 16px; }
+}
+
+/* 애니메이션 */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.f1 { animation: fadeUp 0.55s ease 0.0s both; }
+.f2 { animation: fadeUp 0.55s ease 0.12s both; }
+.f3 { animation: fadeUp 0.55s ease 0.24s both; }
+.f4 { animation: fadeUp 0.55s ease 0.36s both; }
+.f5 { animation: fadeUp 0.55s ease 0.48s both; }
+</style>
+</head>
+<body>
+
+<!-- 선택 근거 배너 -->
+<div class="pick-bar">
+  <div class="pick-badge">🏆 선택: 이미지 4</div>
+  <div class="pick-text">
+    <strong>흑백 풀스크린 좌우 분할</strong>이 6개 중 전환율 최고 —
+    극단적인 명암 대비로 "Before의 고통 → After의 해방"을 즉각 각인. 스크롤 없이 한 화면에서 판단 완료.
+  </div>
+</div>
+
+<!-- 헤더 -->
+<div class="sec-header f1">
+  <div class="header-label">SECTION 08 · TRANSFORMATION</div>
+  <h2 class="header-title">방이 정돈되는 <em>변화</em></h2>
+  <div class="header-summary">
+    <span class="sum-before">흩어진 피규어</span>
+    <span class="sum-icon">→</span>
+    <span class="sum-after">한 줄 정렬 + LED 인테리어</span>
+  </div>
+</div>
+
+<!-- 풀스크린 분할 -->
+<div class="split-scene f2">
+
+  <!-- 중앙 분리선 -->
+  <div class="split-center-line"></div>
+  <div class="split-center-label">VS</div>
+
+  <!-- BEFORE -->
+  <div class="col-before">
+    <div class="before-tag">✕ BEFORE — 정리 전</div>
+    <div class="col-before-title">흩어진 피규어,<br>어수선한 방</div>
+
+    <div class="chaos-scene">
+      <div class="chaos-grid">
+        <span class="c-fig">🗿</span><span class="c-fig">🦸</span>
+        <span class="c-fig">🧙</span><span class="c-fig">📦</span>
+        <span class="c-fig">⚔️</span><span class="c-fig">🤖</span>
+        <span class="c-fig">📦</span><span class="c-fig">🐉</span>
+      </div>
+    </div>
+
+    <p class="before-desc">흩어져 있던 피규어들이 방 곳곳에 뒤섞여 있습니다. 볼 때마다 한숨이 나고, 결국 박스에 다시 넣게 됩니다.</p>
+
+    <div class="problem-tags">
+      <span class="prob-tag">먼지</span>
+      <span class="prob-tag">어수선함</span>
+      <span class="prob-tag">박스 방치</span>
+    </div>
+  </div>
+
+  <!-- AFTER -->
+  <div class="col-after">
+    <div class="after-tag">✓ AFTER — 정리 후</div>
+    <div class="col-after-title">한 줄 정렬,<br><span>인테리어 포인트</span></div>
+
+    <div class="order-scene">
+      <div class="led-top"></div>
+      <div class="ordered-row">
+        <span class="o-fig">🗿</span>
+        <span class="o-fig">🦸</span>
+        <span class="o-fig">🧙</span>
+        <span class="o-fig">🤖</span>
+        <span class="o-fig">🐉</span>
+      </div>
+      <div class="led-label">⚡ LED ON · 전시 라인 활성화</div>
+    </div>
+
+    <p class="after-desc">흩어져 있던 피규어가 한 줄로 정리되면 공간이 바로 정돈됩니다. 조명이 켜지면 수납이 아니라 인테리어 포인트가 됩니다.</p>
+
+    <div class="result-tags">
+      <span class="res-tag">✓ 한 줄 정렬</span>
+      <span class="res-tag">✓ LED 인테리어</span>
+      <span class="res-tag">✓ 공간 정돈</span>
+    </div>
+  </div>
+</div>
+
+<!-- 하단 변화 카드 -->
+<div class="change-cards f3">
+  <div class="change-card before-card">
+    <div class="change-emoji">😩</div>
+    <div class="change-content">
+      <div class="change-title">BEFORE — 흩어진 공간</div>
+      <div class="change-desc">흩어진 피규어, 박스에 방치된 컬렉션. 방은 좁고 어수선하게 느껴집니다.</div>
+      <div class="change-metric">📉 컬렉터 71% "정리 포기 경험"</div>
+    </div>
+  </div>
+  <div class="change-card after-card">
+    <div class="change-emoji">✨</div>
+    <div class="change-content">
+      <div class="change-title">AFTER — 정돈된 인테리어</div>
+      <div class="change-desc">조명이 켜지면 수납이 아니라 인테리어 포인트가 됩니다. 공간이 바로 정돈됩니다.</div>
+      <div class="change-metric">📈 공간 만족도 즉각 변화</div>
+    </div>
+  </div>
+</div>
+
+<!-- 변화 요약 배너 -->
+<div class="summary-bar f4">
+  <div>
+    <div class="summary-text">
+      흩어진 피규어 → <span>한 줄 정렬</span><br>
+      수납함 → <span>인테리어 포인트</span>
+    </div>
+    <div class="summary-sub">박스 연결 → 적층 → 칸막이 조절 · 5분이면 공간이 바뀝니다</div>
+  </div>
+  <button class="summary-cta">지금 변화 시작하기 →</button>
+</div>
+
+<!-- 보완 메모 -->
+<div class="memo-wrap f5">
+  <div class="memo-inner">
+
+    <div class="memo-bar">
+      <div class="memo-bar-label">선택 근거 + 보완 포인트</div>
+    </div>
+
+    <!-- 선택 이유 -->
+    <div class="select-box">
+      <div class="select-title">🏆 이미지 4를 선택한 이유</div>
+      <div class="select-body">
+        6개 디자인 중 <strong>흑백 풀스크린 좌우 분할(이미지 4)</strong>이 전환율이 가장 높을 것으로 판단됩니다.<br>
+        ① <strong>극단적 명암 대비(검정 vs 흰색)</strong>로 "Before의 고통 → After의 해방"을 스크롤 없이 한 화면에서 즉각 전달.<br>
+        ② <strong>타이포가 가장 굵고 크다</strong> — 스캔 속도가 빨라 이탈률을 낮춥니다.<br>
+        ③ 이미지 3(네이비 씬)은 분위기는 좋지만 제품 변화를 직접 보여주지 않아 설득력이 약하고, 이미지 5(타임라인)는 읽는 데 시간이 걸립니다. 이미지 4는 보는 즉시 판단이 끝납니다.
+      </div>
+    </div>
+
+    <!-- 보완 그리드 -->
+    <div class="improve-grid">
+      <div class="improve-card">
+        <div class="imp-no">IMPROVE 01</div>
+        <div class="imp-title">헤더에 변화 요약 한 줄 추가</div>
+        <div class="imp-body">이미지 4는 타이틀 아래가 바로 씬으로 넘어가 맥락이 빠졌습니다. → <em>"흩어진 피규어 → 한 줄 정렬 + LED 인테리어"</em> 한 줄로 섹션 목적을 명확히 했습니다.</div>
+      </div>
+      <div class="improve-card">
+        <div class="imp-no">IMPROVE 02</div>
+        <div class="imp-title">AFTER 씬 LED 글로우 연출</div>
+        <div class="imp-body">이미지 4의 AFTER 씬은 단순 어두운 배경이었습니다. → <em>상단 LED 라이트 바 + 피규어 drop-shadow + float 애니메이션</em>으로 "조명이 켜진 인테리어" 느낌을 실제로 구현했습니다.</div>
+      </div>
+      <div class="improve-card">
+        <div class="imp-no">IMPROVE 03</div>
+        <div class="imp-title">하단 카드에 수치 태그 추가</div>
+        <div class="imp-body">이미지 4의 하단 카드는 텍스트만 있었습니다. → <em>"컬렉터 71% 정리 포기 경험"</em> 같은 수치 태그를 추가해 Before의 고통에 근거를 부여하고 공감을 높였습니다.</div>
+      </div>
+      <div class="improve-card">
+        <div class="imp-no">IMPROVE 04</div>
+        <div class="imp-title">변화 요약 배너 + CTA 추가</div>
+        <div class="imp-body">이미지 4는 섹션이 하단 카드로 끝나 다음 행동으로 연결되지 않았습니다. → <em>네이비 배너 + "지금 변화 시작하기" CTA 버튼</em>으로 변화 감동을 구매 의지로 바로 전환합니다.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

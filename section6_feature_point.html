@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>핵심 기능 3가지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --white: #ffffff;
+    --navy: #0d1b3e;
+    --blue: #1a56db;
+    --blue-light: #e8f0fe;
+    --accent: #ff6b35;
+    --text-main: #111827;
+    --text-sub: #4b5563;
+    --text-muted: #9ca3af;
+    --border: #e5e7eb;
+    --card-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --card-shadow-hover: 0 12px 40px rgba(26,86,219,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+
+  .section-wrap {
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* 헤더 */
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .label-tag {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    font-weight: 400;
+  }
+
+  /* 카드 그리드 */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* 이미지 영역 */
+  .card-img-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 68%;
+    overflow: hidden;
+    background: #e8eff8;
+  }
+
+  .card-img-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .feature-card:hover .card-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  /* 번호 배지 — 이미지 위에 오버레이 */
+  .num-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(26,86,219,0.4);
+  }
+
+  /* ✅ 보완: 기능 강점 태그 (이미지 우하단) */
+  .img-tag {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(13,27,62,0.85);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+  }
+
+  /* 텍스트 바디 */
+  .card-body {
+    padding: 24px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .feature-name {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  /* ✅ 보완: 핵심 수치/스펙 강조 */
+  .feature-spec {
+    margin-top: 18px;
+    padding: 12px 16px;
+    background: var(--blue-light);
+    border-radius: 10px;
+    border-left: 3px solid var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .spec-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .spec-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.4;
+  }
+
+  /* ✅ 보완: 하단 보완 포인트 배너 */
+  .improve-banner {
+    margin-top: 36px;
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .banner-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .banner-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+  }
+
+  .banner-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  .banner-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 3px;
+  }
+
+  .banner-cta {
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+
+  .banner-cta:hover { opacity: 0.88; }
+
+  /* 디자인 보완 메모 (레드라인 스타일) */
+  .memo-section {
+    margin-top: 48px;
+    background: #fff8f0;
+    border: 2px dashed #ff6b35;
+    border-radius: 16px;
+    padding: 28px 32px;
+  }
+
+  .memo-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .memo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .memo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  .memo-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  /* 카드별 강조 색상 */
+  .card-1 .num-badge { background: #1a56db; }
+  .card-2 .num-badge { background: #0e9f6e; }
+  .card-3 .num-badge { background: #9333ea; }
+
+  .card-2 .feature-spec { background: #ecfdf5; border-color: #0e9f6e; }
+  .card-2 .spec-text { color: #0e9f6e; }
+
+  .card-3 .feature-spec { background: #f5f3ff; border-color: #9333ea; }
+  .card-3 .spec-text { color: #9333ea; }
+
+  /* 플레이스홀더 이미지 스타일 */
+  .placeholder-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+  }
+
+  .placeholder-1 { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+  .placeholder-2 { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); }
+  .placeholder-3 { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+
+  @media (max-width: 768px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .improve-banner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="section-wrap">
+
+  <!-- 헤더 -->
+  <div class="section-header">
+    <div class="label-tag">FEATURE POINT</div>
+    <h2 class="section-title">핵심 기능 3가지</h2>
+    <p class="section-sub">오직 수집가를 위해 설계된 디테일</p>
+  </div>
+
+  <!-- 카드 그리드 -->
+  <div class="feature-grid">
+
+    <!-- 카드 1: 분리형 칸막이 -->
+    <div class="feature-card card-1">
+      <div class="card-img-wrap">
+        <div class="placeholder-img placeholder-1">🗃️</div>
+        <div class="num-badge">1</div>
+        <div class="img-tag">자유 배치 가능</div>
+      </div>
+      <div class="card-body">
+        <div class="feature-name">① 분리형 칸막이</div>
+        <div class="feature-desc">
+          칸막이는 분리 가능하며 세로 크기의 피규어도 보관 가능. 컬렉션 크기에 맞게 자유롭게 재구성하세요.
+        </div>
+        <div class="feature-spec">
+          <span class="spec-icon">📐</span>
+          <span class="spec-text">대형 피규어도 OK<br>세로형 완전 호환</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 카드 2: 적층 홈 설계 -->
+    <div class="feature-card card-2">
+      <div class="card-img-wrap">
+        <div class="placeholder-img placeholder-2">🔩</div>
+        <div class="num-badge">2</div>
+        <div class="img-tag">흔들림 ZERO</div>
+      </div>
+      <div class="card-body">
+        <div class="feature-name">② 적층 홈 설계</div>
+        <div class="feature-desc">
+          바닥면 홈으로 안전하게 겹쳐 쌓을 수 있음. 공간이 부족할 때 위로 확장하세요.
+        </div>
+        <div class="feature-spec">
+          <span class="spec-icon">🔒</span>
+          <span class="spec-text">락킹 그루브 고정<br>적층 시 슬립 방지</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 카드 3: Type-C 확장 -->
+    <div class="feature-card card-3">
+      <div class="card-img-wrap">
+        <div class="placeholder-img placeholder-3">⚡</div>
+        <div class="num-badge">3</div>
+        <div class="img-tag">선 정리 완벽</div>
+      </div>
+      <div class="card-body">
+        <div class="feature-name">③ Type-C 확장</div>
+        <div class="feature-desc">
+          박스 1개 전원공급으로 최대 5개까지 전원 연결 가능. 선 하나로 전체 컬렉션에 빛을 채우세요.
+        </div>
+        <div class="feature-spec">
+          <span class="spec-icon">🔌</span>
+          <span class="spec-text">최대 5개 데이지 체인<br>전원 1개로 전부 해결</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA 배너 -->
+  <div class="improve-banner">
+    <div class="banner-left">
+      <div class="banner-icon">📦</div>
+      <div>
+        <div class="banner-title">지금 바로 컬렉션을 빛나게 하세요</div>
+        <div class="banner-sub">보관 + 전시 + LED 조명 — 모두 하나의 박스에</div>
+      </div>
+    </div>
+    <button class="banner-cta">구매하러 가기 →</button>
+  </div>
+
+  <!-- 디자인 보완 메모 -->
+  <div class="memo-section">
+    <div class="memo-title">✏️ 이미지 2 대비 보완 포인트</div>
+    <div class="memo-list">
+      <div class="memo-item">
+        <div class="memo-dot"></div>
+        <div><strong>스펙 강조 박스 추가</strong> — 기능 설명만으로는 약했던 신뢰도를 "대형 피규어 OK", "최대 5개 데이지 체인" 등 수치·스펙 강조 블록으로 보완</div>
+      </div>
+      <div class="memo-item">
+        <div class="memo-dot"></div>
+        <div><strong>이미지 위 태그 추가</strong> — 각 기능의 핵심 USP를 이미지 우하단 뱃지로 스캔 단계에서 즉각 인지 가능하도록 개선</div>
+      </div>
+      <div class="memo-item">
+        <div class="memo-dot"></div>
+        <div><strong>카드별 색상 분리</strong> — 이미지 2는 3개 카드가 동일 톤이라 구분이 약했음. 블루·그린·퍼플로 기능별 개성 부여</div>
+      </div>
+      <div class="memo-item">
+        <div class="memo-dot"></div>
+        <div><strong>CTA 배너 추가</strong> — 기능 열거 후 구매 행동 유도 연결고리 없이 끝나던 구조를 개선. 섹션 하단에 전환 버튼 직접 배치</div>
+      </div>
+      <div class="memo-item">
+        <div class="memo-dot"></div>
+        <div><strong>호버 인터랙션</strong> — 카드 마우스 오버 시 이미지 줌 + 카드 부상 효과로 몰입감과 클릭 유도율 향상</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

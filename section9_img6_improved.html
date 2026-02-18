@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>섹션 9 — 이미지6 보완판</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Black+Han+Sans&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #0d0d0d; }
+
+/* 선택 배너 */
+.pick-bar {
+  background: #161616; border-bottom: 1px solid #252525;
+  padding: 14px 40px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.pick-badge {
+  background: #ff3c00; color: #fff; font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  padding: 5px 12px; border-radius: 2px; flex-shrink: 0; text-transform: uppercase;
+}
+.pick-text { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.55; }
+.pick-text strong { color: rgba(255,255,255,.85); }
+
+/* 섹션 본체 */
+#s9 {
+  background: #0d0d0d; padding: 88px 24px 100px;
+  position: relative; overflow: hidden;
+}
+/* 배경 워터마크 */
+#s9::before {
+  content: 'TRUST'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Bebas Neue', cursive; font-size: 260px;
+  color: rgba(255,255,255,.013); white-space: nowrap;
+  pointer-events: none; letter-spacing: -.04em; line-height: 1;
+}
+
+.inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+/* 헤더 */
+.s-header { text-align: center; margin-bottom: 52px; }
+.kicker {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: .22em; color: #555; text-transform: uppercase; margin-bottom: 16px;
+}
+.s-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(36px, 5.5vw, 64px); color: #fff;
+  line-height: 1.05; letter-spacing: -.03em;
+}
+/* 신뢰 포인트 강조 밑줄 */
+.s-title .hl {
+  position: relative; display: inline-block;
+}
+.s-title .hl::after {
+  content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
+  height: 7px; background: #ff3c00; z-index: -1; border-radius: 2px;
+}
+
+/* 스택 */
+.card-stack {
+  position: relative; display: flex; flex-direction: column;
+  gap: 14px; padding: 0 12px; margin-bottom: 32px;
+}
+/* 그림자 레이어 */
+.stack-shadow {
+  position: absolute; top: -8px; left: 4px; right: -4px; bottom: 8px;
+  background: rgba(255,60,0,.08); border-radius: 22px;
+  border: 1px solid rgba(255,60,0,.12); z-index: 0;
+}
+
+.s-card {
+  position: relative; z-index: 1; border-radius: 20px; overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 24px;
+}
+.s-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+
+/* 카드 1 — 오렌지 */
+.c1 {
+  background: linear-gradient(135deg, #ff3c00 0%, #ff6b35 100%);
+  padding: 38px 40px;
+}
+/* 카드 2 — 화이트 */
+.c2 {
+  background: #fff; padding: 38px 40px;
+}
+
+/* 카드 번호 (✅ 보완: 번호 라벨 추가) */
+.c-no {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  font-weight: 700; letter-spacing: .16em; flex-shrink: 0;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  opacity: .5;
+}
+.c1 .c-no { color: #fff; }
+.c2 .c-no { color: #bbb; }
+
+.c-body {}
+
+/* 카드 제목 */
+.c-title {
+  font-family: 'Black Han Sans', sans-serif; font-size: 22px;
+  margin-bottom: 10px; letter-spacing: -.02em;
+}
+.c1 .c-title { color: #fff; }
+.c2 .c-title { color: #0d0d0d; }
+
+/* 수치 강조 뱃지 (✅ 보완: 카드 내 수치 분리) */
+.c-metric {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 100px;
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  font-weight: 700; margin-bottom: 10px;
+}
+.c1 .c-metric { background: rgba(255,255,255,.2); color: #fff; }
+.c2 .c-metric { background: rgba(13,13,13,.08); color: #0d0d0d; border: 1px solid rgba(13,13,13,.1); }
+
+.c-desc { font-size: 14px; line-height: 1.75; }
+.c1 .c-desc { color: rgba(255,255,255,.8); }
+.c2 .c-desc { color: #555; }
+
+/* CTA 버튼 위계 (✅ 보완: Fill vs Outline 구분) */
+.c-btn {
+  padding: 15px 28px; border-radius: 100px; font-size: 13px;
+  font-weight: 900; white-space: nowrap; flex-shrink: 0;
+  cursor: pointer; border: none; transition: transform .2s, box-shadow .2s;
+  letter-spacing: -.01em;
+}
+.c-btn:hover { transform: scale(1.05); }
+/* 카드1 버튼: Fill (주 행동) */
+.c1 .c-btn { background: #fff; color: #ff3c00; box-shadow: 0 4px 16px rgba(0,0,0,.15); }
+/* 카드2 버튼: 어두운 아웃라인 (보조 행동) */
+.c2 .c-btn { background: transparent; color: #0d0d0d; border: 2px solid #0d0d0d; }
+.c2 .c-btn:hover { background: #0d0d0d; color: #fff; }
+
+/* 신뢰 뱃지 줄 (✅ 보완: 필 타입으로 강화) */
+.trust-badges {
+  display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+}
+.t-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 100px; padding: 9px 16px;
+  font-size: 12px; color: rgba(255,255,255,.5);
+  font-weight: 500; transition: border-color .2s, color .2s;
+}
+.t-badge:hover { border-color: rgba(255,60,0,.45); color: rgba(255,255,255,.85); }
+.t-badge strong { color: rgba(255,255,255,.9); font-weight: 700; }
+
+/* 보완 메모 */
+.memo { background: #f8f6f3; padding: 52px 40px; }
+.memo-inner { max-width: 860px; margin: 0 auto; }
+.memo-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.memo-bar::before { content: ''; width: 28px; height: 2px; background: #f59e0b; }
+.memo-label { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: .14em; text-transform: uppercase; }
+.select-box { background: #fffbf0; border: 1.5px solid #f59e0b; border-radius: 14px; padding: 22px 26px; margin-bottom: 20px; }
+.select-title { font-size: 14px; font-weight: 900; color: #92400e; margin-bottom: 8px; }
+.select-body { font-size: 13px; color: #78350f; line-height: 1.8; }
+.select-body strong { color: #0e0e0e; font-weight: 700; }
+.imp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.imp-card { background: #fff; border: 1.5px solid #e5ddd0; border-left: 4px solid #f59e0b; border-radius: 12px; padding: 20px; }
+.imp-no { font-family: 'DM Mono', monospace; font-size: 10px; color: #d97706; letter-spacing: .12em; margin-bottom: 5px; }
+.imp-tit { font-size: 13px; font-weight: 900; color: #0e0e0e; margin-bottom: 5px; }
+.imp-body { font-size: 12px; color: #6b5c48; line-height: 1.7; }
+.imp-body em { font-style: normal; color: #92400e; font-weight: 600; }
+
+@media (max-width: 640px) {
+  .s-card { grid-template-columns: 1fr; }
+  .c1, .c2 { padding: 28px 24px; }
+  .c-no { writing-mode: horizontal-tb; }
+  .imp-grid { grid-template-columns: 1fr; }
+  .pick-bar { padding: 12px 16px; }
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.f1{animation:fadeUp .55s ease .0s both}
+.f2{animation:fadeUp .55s ease .1s both}
+.f3{animation:fadeUp .55s ease .2s both}
+.f4{animation:fadeUp .55s ease .3s both}
+</style>
+</head>
+<body>
+
+<div class="pick-bar">
+  <div class="pick-badge">🏆 선택: 이미지 6</div>
+  <div class="pick-text">
+    <strong>오렌지 오퍼 카드 스택</strong> — 6개 중 유일하게 각 혜택마다 CTA 버튼이 붙어있어 신뢰→행동 거리가 0. 강한 컬러 대비로 스캔 속도 1위.
+  </div>
+</div>
+
+<section id="s9">
+  <div class="inner">
+    <div class="s-header f1">
+      <div class="kicker">SECTION 09 · TRUST POINT</div>
+      <h2 class="s-title">신뢰 <span class="hl">포인트</span></h2>
+    </div>
+
+    <div class="card-stack f2">
+      <div class="stack-shadow"></div>
+
+      <!-- 카드 1: Type-C -->
+      <div class="s-card c1">
+        <div class="c-no">BENEFIT 01</div>
+        <div class="c-body">
+          <div class="c-title">🔌 Type-C 표준 인터페이스</div>
+          <div class="c-metric">⚡ 최대 5대 체인 · PLUG &amp; PLAY</div>
+          <div class="c-desc">연결이 직관적입니다. 어댑터 없이 꽂으면 즉시 작동합니다.<br>최대 5대까지 체인 연결 — 선 하나로 전시 전체를 밝힙니다.</div>
+        </div>
+        <button class="c-btn">지금 연결 →</button>
+      </div>
+
+      <!-- 카드 2: 무료배송 -->
+      <div class="s-card c2">
+        <div class="c-no">BENEFIT 02</div>
+        <div class="c-body">
+          <div class="c-title">🚚 무료 배송</div>
+          <div class="c-metric">📦 ₩0 배송비 · 전국 무료</div>
+          <div class="c-desc">무료배송으로 부담 없이 시작할 수 있어요.<br>금액 조건 없이 전국 어디서나 무료로 받아보세요.</div>
+        </div>
+        <button class="c-btn">무료로 받기 →</button>
+      </div>
+    </div>
+
+    <!-- 신뢰 뱃지 줄 -->
+    <div class="trust-badges f3">
+      <div class="t-badge">⚡ <strong>USB-C</strong> 표준 규격</div>
+      <div class="t-badge">🔗 최대 <strong>5대</strong> 체인</div>
+      <div class="t-badge">📦 <strong>전국 무료</strong> 배송</div>
+      <div class="t-badge">🛡️ <strong>1년</strong> 품질 보증</div>
+      <div class="t-badge">↩️ <strong>30일</strong> 반품</div>
+    </div>
+  </div>
+</section>
+
+<!-- 보완 메모 -->
+<div class="memo f4">
+  <div class="memo-inner">
+    <div class="memo-bar"><div class="memo-label">선택 근거 + 보완 포인트</div></div>
+    <div class="select-box">
+      <div class="select-title">🏆 이미지 6을 선택한 이유</div>
+      <div class="select-body">
+        6개 중 <strong>이미지 6만이 각 혜택마다 CTA 버튼</strong>을 붙여놨습니다. 신뢰 포인트를 읽는 순간 바로 행동할 수 있어 전환 거리가 0입니다. 강한 오렌지+흰색 컬러 대비로 스캔 속도도 가장 빠릅니다.
+      </div>
+    </div>
+    <div class="imp-grid">
+      <div class="imp-card"><div class="imp-no">IMPROVE 01</div><div class="imp-tit">카드 번호 라벨 추가</div><div class="imp-body">원본엔 카드 구분이 없었습니다. → <em>BENEFIT 01 / 02</em> 라벨로 "두 가지 독립 약속" 구조를 명확히 했습니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 02</div><div class="imp-tit">카드 내 수치 뱃지 분리</div><div class="imp-body">원본엔 수치가 본문에 묻혀 있었습니다. → <em>"⚡ 최대 5대 체인"</em> 등 수치를 별도 뱃지로 분리해 즉각 각인됩니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 03</div><div class="imp-tit">버튼 위계 구분</div><div class="imp-body">원본엔 두 버튼이 같은 스타일이었습니다. → <em>Fill(주행동) vs Outline(보조)</em>으로 구분해 주요 전환 경로를 명확히 했습니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 04</div><div class="imp-tit">신뢰 뱃지 필 타입 강화</div><div class="imp-body">원본엔 하단 리스트가 너무 작았습니다. → <em>5개 뱃지(USB-C·5대·무료배송·1년·30일)</em>를 배경 있는 필 타입으로 강화했습니다.</div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

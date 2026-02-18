@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>섹션 11 — 이미지1 보완판</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Black+Han+Sans&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #0a0800; }
+
+/* 선택 배너 */
+.pick-bar {
+  background: #161410; border-bottom: 1px solid #252010;
+  padding: 14px 40px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.pick-badge {
+  background: #ffc832; color: #0a0800; font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  padding: 5px 12px; border-radius: 2px; flex-shrink: 0; text-transform: uppercase;
+}
+.pick-text { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.55; }
+.pick-text strong { color: rgba(255,255,255,.8); }
+
+/* 섹션 본체 */
+#s11 {
+  background: #0a0800;
+  padding: 120px 24px 130px;
+  position: relative; overflow: hidden;
+  min-height: 92vh; display: flex; align-items: center;
+}
+
+/* 방사형 골드 글로우 */
+#s11::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(255,200,50,.07) 0%, rgba(255,150,20,.035) 35%, transparent 65%);
+  pointer-events: none;
+}
+/* 사선 패턴 */
+#s11::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-60deg, transparent 0, transparent 40px, rgba(255,200,50,.012) 40px, rgba(255,200,50,.012) 41px);
+  pointer-events: none;
+}
+
+.inner {
+  max-width: 820px; margin: 0 auto; position: relative; z-index: 1; text-align: center;
+}
+
+/* 긴박감 칩 */
+.urgency {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,200,50,.1); border: 1px solid rgba(255,200,50,.25);
+  border-radius: 100px; padding: 9px 20px;
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  color: #ffc832; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 36px;
+  animation: chipPulse 2.5s ease-in-out infinite;
+}
+@keyframes chipPulse {
+  0%,100% { border-color: rgba(255,200,50,.25); }
+  50%      { border-color: rgba(255,200,50,.6); }
+}
+.u-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ffc832; animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+/* ✅ 보완: 헤드라인 2층 구조 */
+.h-em {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(15px, 2vw, 21px); color: rgba(255,255,255,.35);
+  letter-spacing: -.01em; margin-bottom: 10px; font-weight: 400;
+}
+.s-title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(38px, 6.5vw, 80px);
+  color: #fff; line-height: 1.08;
+  letter-spacing: -.03em; margin-bottom: 22px;
+}
+.s-title .gold {
+  background: linear-gradient(90deg, #ffc832 0%, #ffaa00 50%, #ffc832 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+@keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+
+/* ✅ 보완: 3단계 서브 카피 */
+.steps-sub {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; font-size: 14px; color: rgba(255,255,255,.35);
+  margin-bottom: 52px; flex-wrap: wrap;
+}
+.step-item { color: rgba(255,255,255,.65); font-weight: 600; }
+.step-arr  { color: rgba(255,200,50,.4); }
+.step-end  { color: #ffc832; font-weight: 700; }
+
+/* 골드 CTA 버튼 */
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 13px;
+  background: linear-gradient(135deg, #ffc832 0%, #ffaa00 100%);
+  color: #0a0800; font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(15px, 2vw, 21px);
+  padding: 21px 52px; border-radius: 100px; border: none; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 8px 36px rgba(255,200,50,.32);
+  animation: ctaPulse 2.5s ease-in-out infinite;
+  margin-bottom: 22px;
+}
+@keyframes ctaPulse {
+  0%,100%{ box-shadow: 0 8px 36px rgba(255,200,50,.32), 0 0 0 0 rgba(255,200,50,.22); }
+  50%    { box-shadow: 0 12px 56px rgba(255,200,50,.5),  0 0 0 14px rgba(255,200,50,0); }
+}
+.cta-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  animation: none;
+  box-shadow: 0 16px 56px rgba(255,200,50,.52) !important;
+}
+/* 광택 스윕 */
+.cta-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+  animation: sweep 2.8s ease-in-out infinite;
+}
+@keyframes sweep { 0%{left:-80%} 60%,100%{left:160%} }
+.cta-icon { font-size: 22px; }
+
+/* ✅ 보완: 신뢰 뱃지 필 타입 */
+.badges {
+  display: flex; justify-content: center; gap: 10px;
+  flex-wrap: wrap; margin-bottom: 14px;
+}
+.badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,200,50,.07);
+  border: 1px solid rgba(255,200,50,.18);
+  border-radius: 100px; padding: 8px 16px;
+  font-size: 12px; color: rgba(255,255,255,.5);
+  font-weight: 500; transition: border-color .2s, color .2s;
+}
+.badge:hover { border-color: rgba(255,200,50,.45); color: rgba(255,255,255,.85); }
+.badge strong { color: #ffc832; font-weight: 700; }
+
+/* ✅ 보완: 긴박감 1줄 */
+.urgency-note {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  color: rgba(255,255,255,.2); letter-spacing: .1em;
+}
+
+/* 데코 라인 */
+.deco {
+  display: flex; align-items: center; gap: 14px;
+  margin-top: 52px; opacity: .14;
+}
+.deco::before, .deco::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, #ffc832, transparent);
+}
+.deco span {
+  font-family: 'Bebas Neue', cursive; font-size: 12px;
+  color: #ffc832; letter-spacing: .3em; white-space: nowrap;
+}
+
+/* 보완 메모 */
+.memo { background: #f8f6f3; padding: 52px 40px; }
+.memo-inner { max-width: 820px; margin: 0 auto; }
+.memo-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.memo-bar::before { content: ''; width: 28px; height: 2px; background: #f59e0b; }
+.memo-label { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: .14em; text-transform: uppercase; }
+.select-box { background: #fffbf0; border: 1.5px solid #f59e0b; border-radius: 14px; padding: 22px 26px; margin-bottom: 18px; }
+.select-title { font-size: 14px; font-weight: 900; color: #92400e; margin-bottom: 8px; }
+.select-body  { font-size: 13px; color: #78350f; line-height: 1.8; }
+.select-body strong { color: #0e0e0e; font-weight: 700; }
+.imp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.imp-card { background: #fff; border: 1.5px solid #e5ddd0; border-left: 4px solid #f59e0b; border-radius: 12px; padding: 18px 20px; }
+.imp-no   { font-family: 'DM Mono', monospace; font-size: 10px; color: #d97706; letter-spacing: .12em; margin-bottom: 5px; }
+.imp-tit  { font-size: 13px; font-weight: 900; color: #0e0e0e; margin-bottom: 5px; }
+.imp-body { font-size: 12px; color: #6b5c48; line-height: 1.7; }
+.imp-body em { font-style: normal; color: #92400e; font-weight: 600; }
+
+@media (max-width: 640px) {
+  .steps-sub { gap: 5px; }
+  .imp-grid { grid-template-columns: 1fr; }
+  .pick-bar { padding: 12px 16px; }
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.f1{animation:fadeUp .55s ease .0s both}
+.f2{animation:fadeUp .55s ease .12s both}
+.f3{animation:fadeUp .55s ease .24s both}
+.f4{animation:fadeUp .55s ease .36s both}
+.f5{animation:fadeUp .55s ease .48s both}
+</style>
+</head>
+<body>
+
+<div class="pick-bar">
+  <div class="pick-badge">🏆 선택: 이미지 1</div>
+  <div class="pick-text">
+    <strong>블랙+골드 풀스크린 CTA</strong> — 5개 중 골드 Fill 버튼 임팩트 1위. "당신의 취향은 보존될 가치" 감성 선언 + 긴박감 칩 + 신뢰 뱃지 3박자 완비.
+  </div>
+</div>
+
+<section id="s11">
+  <div class="inner">
+
+    <div class="urgency f1">
+      <div class="u-dot"></div>
+      지금 바로 시작 가능
+    </div>
+
+    <!-- ✅ 보완: 감성층 -->
+    <div class="h-em f1">당신의 컬렉션은 빛날 자격이 있습니다</div>
+
+    <h2 class="s-title f2">
+      정리 + 인테리어,<br>
+      <span class="gold">한 번에 완성</span>됩니다
+    </h2>
+
+    <!-- ✅ 보완: 3단계 서브 카피 -->
+    <div class="steps-sub f3">
+      <span class="step-item">박스 연결</span>
+      <span class="step-arr">→</span>
+      <span class="step-item">적층</span>
+      <span class="step-arr">→</span>
+      <span class="step-item">칸막이 조절</span>
+      <span class="step-arr">·</span>
+      <span class="step-end">딱 5분이면 컬렉션이 빛납니다</span>
+    </div>
+
+    <div class="f4" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+      <button class="cta-btn">
+        <span class="cta-icon">🚀</span>
+        무료배송으로, 전시 라인을 시작해보세요
+      </button>
+
+      <!-- ✅ 보완: 필 타입 신뢰 뱃지 -->
+      <div class="badges">
+        <div class="badge">📦 <strong>무료</strong> 전국 배송</div>
+        <div class="badge">⚡ <strong>즉시</strong> 사용 가능</div>
+        <div class="badge">🛡️ <strong>1년</strong> 보증</div>
+        <div class="badge">↩️ <strong>30일</strong> 반품</div>
+      </div>
+
+      <!-- ✅ 보완: 긴박감 1줄 -->
+      <div class="urgency-note">오늘 주문 시 내일 출발 예정</div>
+    </div>
+
+    <div class="deco f5"><span>COLLECTOR'S STORAGE</span></div>
+
+  </div>
+</section>
+
+<!-- 보완 메모 -->
+<div class="memo">
+  <div class="memo-inner">
+    <div class="memo-bar"><div class="memo-label">선택 근거 + 보완 포인트</div></div>
+    <div class="select-box">
+      <div class="select-title">🏆 이미지 1을 선택한 이유 (5개 종합)</div>
+      <div class="select-body">
+        5개 중 <strong>이미지 1(블랙+골드)</strong>이 CTA 섹션에 필요한 요소를 가장 완비했습니다. 골드 Fill 버튼의 시각 임팩트, "지금 바로 시작 가능" 긴박감 칩, 배경 대비 명확도가 5개 중 1위입니다. 특히 피규어 컬렉터에게 골드는 "가치 있는 것"을 연상시켜 제품 포지셔닝과 일치합니다.
+      </div>
+    </div>
+    <div class="imp-grid">
+      <div class="imp-card"><div class="imp-no">IMPROVE 01</div><div class="imp-tit">헤드라인 2층 구조</div><div class="imp-body">원본엔 기능 헤드라인만 있었습니다. → <em>"당신의 컬렉션은 빛날 자격"(감성층)</em> + "정리+인테리어 한 번에"(결과층) 2층으로 감성 공감 → 논리 결론 흐름을 완성했습니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 02</div><div class="imp-tit">3단계 서브 카피</div><div class="imp-body">원본 서브 카피가 헤드라인을 반복했습니다. → <em>"박스 연결 → 적층 → 칸막이 조절 · 딱 5분"</em>으로 버튼 직전에 "나도 할 수 있겠다" 확신을 만들었습니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 03</div><div class="imp-tit">신뢰 뱃지 필 타입</div><div class="imp-body">원본엔 하단 체크 리스트가 너무 작고 흐렸습니다. → <em>골드 배경 필 타입 4개 뱃지</em>로 버튼 아래에서 마지막 망설임을 실제로 제거합니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 04</div><div class="imp-tit">긴박감 1줄 추가</div><div class="imp-body">원본엔 결정을 미루게 하는 장치가 없었습니다. → <em>"오늘 주문 시 내일 출발 예정"</em> 담담한 톤으로 긴박감을 추가해 이탈을 방지합니다.</div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

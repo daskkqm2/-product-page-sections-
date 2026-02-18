@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>섹션 10 — 이미지2 보완판</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Black+Han+Sans&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #f8f6f3; }
+
+/* 선택 배너 */
+.pick-bar {
+  background: #1a0f05; border-bottom: 1px solid #2a1a0a;
+  padding: 14px 40px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.pick-badge {
+  background: #b08060; color: #fff; font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  padding: 5px 12px; border-radius: 2px; flex-shrink: 0; text-transform: uppercase;
+}
+.pick-text { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.55; }
+.pick-text strong { color: rgba(255,255,255,.85); }
+
+/* 배경 사선 패턴 */
+#s10 {
+  background: #faf7f2; padding: 88px 24px 100px; position: relative; overflow: hidden;
+}
+#s10::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent 0, transparent 60px, rgba(210,180,140,.055) 60px, rgba(210,180,140,.055) 61px);
+  pointer-events: none;
+}
+
+.inner { max-width: 1060px; margin: 0 auto; position: relative; z-index: 1; }
+
+/* 헤더 2분할 */
+.s-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 56px; align-items: end; margin-bottom: 52px;
+}
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: .2em; color: #b08060; text-transform: uppercase; margin-bottom: 16px;
+}
+.s-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(32px, 4.5vw, 52px); color: #1a0f05; line-height: 1.15;
+}
+.s-title em { font-style: italic; color: #b08060; }
+.h-desc {
+  font-size: 15px; color: #7a6a54; line-height: 1.85;
+  border-left: 2px solid #d4b896; padding-left: 20px;
+}
+
+/* ✅ 보완: 자가진단 체크박스 */
+.check-box {
+  background: #fff; border: 1.5px solid #ede5da;
+  border-radius: 16px; padding: 24px 28px; margin-bottom: 36px;
+}
+.check-head {
+  font-size: 14px; font-weight: 900; color: #1a0f05;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.check-head-dot {
+  width: 24px; height: 24px; border-radius: 50%; background: #b08060;
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; flex-shrink: 0;
+}
+.check-list { display: flex; flex-direction: column; gap: 9px; }
+.check-item {
+  display: flex; align-items: center; gap: 11px;
+  font-size: 14px; color: #6b5c48; line-height: 1.6;
+}
+.chk {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid #d4b896; background: #faf7f2;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #b08060; flex-shrink: 0;
+}
+
+/* 페르소나 카드 */
+.personas {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 18px; margin-bottom: 52px;
+}
+.persona {
+  background: #fff; border-radius: 18px; padding: 32px 26px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,.05);
+  transition: transform .3s, box-shadow .3s;
+  border: 1.5px solid #ede5da;
+}
+.persona:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(0,0,0,.1); }
+
+/* ✅ 보완: 컬러 상단 바 */
+.persona::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.persona:nth-child(1)::before { background: linear-gradient(90deg, #e8845c, #f4a670); }
+.persona:nth-child(2)::before { background: linear-gradient(90deg, #5c8de8, #70a4f4); }
+.persona:nth-child(3)::before { background: linear-gradient(90deg, #5cb87a, #70d490); }
+
+.avatar {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 16px;
+}
+.persona:nth-child(1) .avatar { background: #fff3ee; }
+.persona:nth-child(2) .avatar { background: #eef3ff; }
+.persona:nth-child(3) .avatar { background: #eefff3; }
+
+.p-age { font-family: 'DM Mono', monospace; font-size: 10px; color: #b08060; letter-spacing: .1em; margin-bottom: 7px; }
+.p-name { font-size: 16px; font-weight: 900; color: #1a0f05; margin-bottom: 10px; letter-spacing: -.02em; }
+.p-desc { font-size: 13px; color: #7a6a54; line-height: 1.75; margin-bottom: 14px; }
+.p-quote {
+  background: #faf7f2; border-radius: 10px; padding: 11px 14px;
+  font-size: 12px; color: #4a3a24; font-weight: 500; line-height: 1.65;
+  font-style: italic; border-left: 3px solid;
+}
+.persona:nth-child(1) .p-quote { border-color: #e8845c; }
+.persona:nth-child(2) .p-quote { border-color: #5c8de8; }
+.persona:nth-child(3) .p-quote { border-color: #5cb87a; }
+
+/* 3단계 */
+.steps-head {
+  font-family: 'Libre Baskerville', serif; font-size: 26px;
+  color: #1a0f05; text-align: center; margin-bottom: 22px;
+}
+.steps {
+  display: flex; background: #fff; border-radius: 18px;
+  overflow: hidden; border: 1.5px solid #ede5da; margin-bottom: 24px;
+}
+.step {
+  flex: 1; padding: 30px 22px; position: relative;
+  border-right: 1.5px solid #ede5da; text-align: center;
+  transition: background .2s;
+}
+.step:last-child { border-right: none; }
+.step:hover { background: #faf7f2; }
+.step::after {
+  content: '→'; position: absolute; right: -12px; top: 50%;
+  transform: translateY(-50%); font-size: 15px; color: #d4b896;
+  z-index: 2; background: #fff; width: 24px; text-align: center;
+}
+.step:last-child::after { display: none; }
+.step-num { font-family: 'Bebas Neue', cursive; font-size: 36px; color: #ede5da; line-height: 1; margin-bottom: 7px; }
+.step-icon { font-size: 24px; margin-bottom: 7px; display: block; }
+.step-title { font-size: 14px; font-weight: 900; color: #1a0f05; margin-bottom: 4px; }
+.step-desc  { font-size: 12px; color: #7a6a54; line-height: 1.65; }
+/* ✅ 보완: 소요시간 뱃지 */
+.step-time {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 9px; font-family: 'DM Mono', monospace;
+  font-size: 10px; color: #b08060; background: #f5efe8;
+  padding: 3px 10px; border-radius: 100px; letter-spacing: .05em;
+}
+
+/* ✅ 보완: 완료 배너 + CTA */
+.done-banner {
+  background: #1a0f05; border-radius: 16px;
+  padding: 28px 36px; display: flex;
+  align-items: center; justify-content: space-between; gap: 20px;
+}
+.done-text {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 19px; color: #fff; line-height: 1.45;
+}
+.done-text em { font-style: italic; color: #d4b896; }
+.done-sub { font-size: 13px; color: rgba(255,255,255,.35); margin-top: 5px; }
+.done-cta {
+  background: #d4b896; color: #1a0f05; font-size: 13px; font-weight: 900;
+  padding: 13px 28px; border-radius: 100px; border: none; cursor: pointer;
+  white-space: nowrap; transition: transform .2s; flex-shrink: 0;
+  letter-spacing: -.01em;
+}
+.done-cta:hover { transform: scale(1.04); }
+
+/* 보완 메모 */
+.memo { background: #fff; padding: 52px 40px; border-top: 1px solid #ede5da; }
+.memo-inner { max-width: 1060px; margin: 0 auto; }
+.memo-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.memo-bar::before { content: ''; width: 28px; height: 2px; background: #f59e0b; }
+.memo-label { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: .14em; text-transform: uppercase; }
+.select-box { background: #fffbf0; border: 1.5px solid #f59e0b; border-radius: 14px; padding: 22px 26px; margin-bottom: 18px; }
+.select-title { font-size: 14px; font-weight: 900; color: #92400e; margin-bottom: 8px; }
+.select-body  { font-size: 13px; color: #78350f; line-height: 1.8; }
+.select-body strong { color: #0e0e0e; font-weight: 700; }
+.imp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.imp-card { background: #faf8f5; border: 1.5px solid #e5ddd0; border-left: 4px solid #f59e0b; border-radius: 12px; padding: 18px 20px; }
+.imp-no   { font-family: 'DM Mono', monospace; font-size: 10px; color: #d97706; letter-spacing: .12em; margin-bottom: 5px; }
+.imp-tit  { font-size: 13px; font-weight: 900; color: #0e0e0e; margin-bottom: 5px; }
+.imp-body { font-size: 12px; color: #6b5c48; line-height: 1.7; }
+.imp-body em { font-style: normal; color: #92400e; font-weight: 600; }
+
+@media (max-width: 768px) {
+  .s-header, .personas, .imp-grid { grid-template-columns: 1fr; }
+  .steps { flex-direction: column; }
+  .step::after { display: none; }
+  .done-banner { flex-direction: column; align-items: flex-start; }
+  .pick-bar { padding: 12px 16px; }
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.f1{animation:fadeUp .55s ease .0s both}
+.f2{animation:fadeUp .55s ease .1s both}
+.f3{animation:fadeUp .55s ease .2s both}
+.f4{animation:fadeUp .55s ease .3s both}
+.f5{animation:fadeUp .55s ease .4s both}
+</style>
+</head>
+<body>
+
+<div class="pick-bar">
+  <div class="pick-badge">🏆 선택: 이미지 2</div>
+  <div class="pick-text">
+    <strong>아이보리 페르소나 카드</strong> — 페르소나 3종 × 실제 인용구 × 3단계 사용법을 한 페이지에 담아 "나를 위한 제품" 자기 확인이 가장 빠릅니다.
+  </div>
+</div>
+
+<section id="s10">
+  <div class="inner">
+
+    <!-- 헤더 -->
+    <div class="s-header f1">
+      <div>
+        <div class="eyebrow">SECTION 10 · FOR YOU</div>
+        <h2 class="s-title">이런 분께<br><em>추천</em>합니다</h2>
+      </div>
+      <p class="h-desc">
+        피규어를 모으는데 마땅한 장식장이 없던<br>20~40대에 추천합니다.<br><br>
+        박스 연결 → 적층 → 칸막이 조절만 하면<br>전시가 완성돼요.
+      </p>
+    </div>
+
+    <!-- ✅ 보완: 자가진단 체크 -->
+    <div class="check-box f2">
+      <div class="check-head">
+        <div class="check-head-dot">?</div>
+        혹시 이런 경험이 있나요?
+      </div>
+      <div class="check-list">
+        <div class="check-item"><div class="chk">✓</div>피규어가 늘어날수록 방이 좁아지고 어수선해진다</div>
+        <div class="check-item"><div class="chk">✓</div>임시 선반이나 박스에 올려뒀다가 쓰러진 피규어를 본 적 있다</div>
+        <div class="check-item"><div class="chk">✓</div>꺼내기 귀찮아서 박스에 넣고 방치한 컬렉션이 있다</div>
+      </div>
+    </div>
+
+    <!-- 페르소나 카드 -->
+    <div class="personas f3">
+      <div class="persona">
+        <div class="avatar">🎮</div>
+        <div class="p-age">20대 · 게이머 컬렉터</div>
+        <div class="p-name">피규어는 모으는데<br>공간이 없는 분</div>
+        <p class="p-desc">좁은 원룸에서도 컬렉션을 멋지게 진열하고 싶은 20대.</p>
+        <div class="p-quote">"방이 좁아서 장식장을 못 뒀는데 이건 딱 맞아요"</div>
+      </div>
+      <div class="persona">
+        <div class="avatar">🏠</div>
+        <div class="p-age">30대 · 직장인 컬렉터</div>
+        <div class="p-name">선반에서 무너진<br>경험 있는 분</div>
+        <p class="p-desc">임시 선반에 놓다 피규어가 쓰러진 경험. 제대로 전시하고 싶던 30대.</p>
+        <div class="p-quote">"드디어 흔들림 없이 전시할 수 있겠다 싶었어요"</div>
+      </div>
+      <div class="persona">
+        <div class="avatar">📦</div>
+        <div class="p-age">40대 · 베테랑 컬렉터</div>
+        <div class="p-name">박스에 넣어두고<br>포기했던 분</div>
+        <p class="p-desc">소중한 컬렉션이 창고에서 잠자고 있는 40대.</p>
+        <div class="p-quote">"박스에서 꺼내는 게 쉬우니까 전시를 유지하게 돼요"</div>
+      </div>
+    </div>
+
+    <!-- 3단계 -->
+    <h3 class="steps-head f3">딱 3단계면 전시 완성</h3>
+    <div class="steps f4">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="step-icon">🔗</span>
+        <div class="step-title">박스 연결</div>
+        <div class="step-desc">Type-C로 박스를 연결합니다. 꽂으면 즉시 LED가 켜져요.</div>
+        <div class="step-time">⏱ 30초</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="step-icon">📐</span>
+        <div class="step-title">적층</div>
+        <div class="step-desc">홈에 맞게 위로 쌓습니다. 흔들림 없이 고정됩니다.</div>
+        <div class="step-time">⏱ 1분</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="step-icon">🗂️</span>
+        <div class="step-title">칸막이 조절</div>
+        <div class="step-desc">피규어 크기에 맞게 칸막이를 조절합니다. 완성!</div>
+        <div class="step-time">⏱ 2분</div>
+      </div>
+    </div>
+
+    <!-- ✅ 보완: 완료 배너 + CTA -->
+    <div class="done-banner f5">
+      <div>
+        <div class="done-text">총 5분이면 <em>전시가 완성됩니다.</em></div>
+        <div class="done-sub">박스 연결 → 적층 → 칸막이 조절 · 누구나 할 수 있어요</div>
+      </div>
+      <button class="done-cta">지금 시작하기 →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- 보완 메모 -->
+<div class="memo">
+  <div class="memo-inner">
+    <div class="memo-bar"><div class="memo-label">선택 근거 + 보완 포인트</div></div>
+    <div class="select-box">
+      <div class="select-title">🏆 이미지 2를 선택한 이유</div>
+      <div class="select-body">
+        6개 중 <strong>이미지 2만이 페르소나 3종 × 실제 인용구 × 3단계 사용법</strong>을 한 페이지에 모두 담았습니다. 구매자가 자신의 상황과 일치하는 카드를 발견하는 순간 "이 제품이 나를 위해 만들어졌다"고 느끼며 전환 의지가 급격히 높아집니다.
+      </div>
+    </div>
+    <div class="imp-grid">
+      <div class="imp-card"><div class="imp-no">IMPROVE 01</div><div class="imp-tit">자가진단 체크 추가</div><div class="imp-body">원본엔 페르소나 카드로 바로 시작했습니다. → <em>"혹시 이런 경험이 있나요?" 3가지 체크</em>로 먼저 3번 끄덕인 뒤 카드로 넘어가 공감 깊이가 깊어집니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 02</div><div class="imp-tit">카드 상단 컬러 바</div><div class="imp-body">원본엔 3카드가 모두 같은 아이보리 배경이었습니다. → <em>오렌지/블루/그린 상단 4px 바</em>로 세 카드가 스캔만 해도 즉각 분리됩니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 03</div><div class="imp-tit">소요시간 뱃지 추가</div><div class="imp-body">원본 단계 설명엔 시간 정보가 없었습니다. → <em>"⏱ 30초 / 1분 / 2분"</em> 뱃지로 "총 3분 30초"라는 메시지를 완성해 허들을 낮춥니다.</div></div>
+      <div class="imp-card"><div class="imp-no">IMPROVE 04</div><div class="imp-tit">완료 배너 + CTA 추가</div><div class="imp-body">원본엔 단계 설명으로 섹션이 그냥 끝났습니다. → <em>"총 5분이면 완성 → 지금 시작하기"</em> 배너가 감동을 즉시 행동으로 연결합니다.</div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
