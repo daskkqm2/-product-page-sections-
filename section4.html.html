@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>디자인 1 - 3가지 변형</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: #e8e8e8; }
+
+  .label-wrap {
+    text-align: center;
+    padding: 48px 20px 20px;
+  }
+  .label-badge {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .label-desc {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+  }
+
+  /* ================================================
+     VARIANT A — 이미지 상단 풀 + 빨간 강조 대비형
+     ================================================ */
+  .va {
+    max-width: 430px;
+    margin: 0 auto 80px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .va-hero {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+  .va-img {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #0f0c29, #302b63, #24243e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .va-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 85%, rgba(239,68,68,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(99,102,241,0.2) 0%, transparent 55%);
+  }
+  .va-img-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .va-emoji { font-size: 80px; filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); }
+  .va-img-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+
+  .va-ribbon {
+    position: absolute;
+    top: 20px; left: -30px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 7px 50px;
+    transform: rotate(-45deg);
+    width: 160px;
+    text-align: center;
+  }
+
+  .va-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, #fff 0%, rgba(255,255,255,0) 100%);
+    height: 100px;
+  }
+
+  .va-content {
+    padding: 0 24px 28px;
+    position: relative;
+    margin-top: -20px;
+  }
+  .va-tag {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+  .va-title {
+    font-size: 26px;
+    font-weight: 900;
+    font-family: 'Noto Serif KR', serif;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .va-title em { color: #ef4444; font-style: normal; }
+  .va-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1.5px solid #f0f0f0;
+  }
+
+  .va-vs {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .va-card { border-radius: 10px; padding: 14px 12px; }
+  .va-card.x { background: #fff5f5; border: 1.5px solid #fecaca; }
+  .va-card.o { background: #18181b; border: 1.5px solid #27272a; }
+  .va-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .va-card.x .va-card-tag { color: #ef4444; }
+  .va-card.o .va-card-tag { color: #a78bfa; }
+  .va-card-text { font-size: 13px; font-weight: 700; line-height: 1.45; }
+  .va-card.x .va-card-text { color: #dc2626; }
+  .va-card.o .va-card-text { color: #fff; }
+  .va-vs-mid { display: flex; align-items: center; justify-content: center; }
+  .va-vs-badge {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 10px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .va-steps { position: relative; display: flex; align-items: flex-start; }
+  .va-step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+  .va-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20px; left: 50%; width: 100%; height: 2px;
+    background: #e5e7eb;
+  }
+  .va-step-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff; border: 2px solid #e5e7eb;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 8px; position: relative; z-index: 1;
+  }
+  .va-step.hot .va-step-dot {
+    background: #ef4444; border-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239,68,68,0.15);
+  }
+  .va-step-name { font-size: 11px; font-weight: 700; color: #4b5563; }
+  .va-step.hot .va-step-name { color: #ef4444; }
+  .va-step-sub { font-size: 10px; color: #9ca3af; margin-top: 2px; line-height: 1.4; }
+
+  /* ================================================
+     VARIANT B — 이미지 왼쪽 고정 + 블루 사이드
+     ================================================ */
+  .vb {
+    max-width: 430px;
+    margin: 0 auto 80px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .vb-split { display: flex; height: 280px; }
+  .vb-img-col {
+    width: 160px; flex-shrink: 0;
+    background: linear-gradient(180deg, #0d1117 0%, #1a2332 100%);
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px; overflow: hidden;
+  }
+  .vb-img-col::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 80%, rgba(59,130,246,0.25) 0%, transparent 60%);
+  }
+  .vb-img-emoji { font-size: 64px; position: relative; z-index: 1; filter: drop-shadow(0 4px 20px rgba(59,130,246,0.4)); }
+  .vb-img-tag {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(59,130,246,0.9);
+    color: #fff; font-size: 9px; font-weight: 700;
+    text-align: center; padding: 6px; letter-spacing: 1px;
+  }
+
+  .vb-right-col {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 24px 18px;
+    border-left: 3px solid #3b82f6;
+  }
+  .vb-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #eff6ff; color: #1d4ed8;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 4px;
+    margin-bottom: 10px; letter-spacing: 0.5px;
+  }
+  .vb-title {
+    font-size: 20px; font-weight: 900; color: #0f172a;
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.35; margin-bottom: 10px;
+  }
+  .vb-title em { color: #3b82f6; font-style: normal; }
+  .vb-desc { font-size: 12px; color: #64748b; line-height: 1.65; }
+
+  .vb-divider { height: 6px; background: linear-gradient(90deg, #3b82f6, #6366f1, #8b5cf6); }
+
+  .vb-body { padding: 24px 20px; }
+
+  .vb-compare { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .vb-compare-row {
+    display: flex; align-items: center; gap: 10px;
+    background: #f8fafc; border-radius: 10px;
+    padding: 12px 14px; border: 1px solid #e2e8f0;
+  }
+  .vb-compare-row.truth { background: #0f172a; border-color: #1e293b; }
+  .vb-compare-icon { font-size: 22px; flex-shrink: 0; }
+  .vb-compare-text { flex: 1; }
+  .vb-compare-label { font-size: 10px; color: #94a3b8; font-weight: 700; margin-bottom: 3px; }
+  .vb-compare-row.truth .vb-compare-label { color: #60a5fa; }
+  .vb-compare-q { font-size: 13px; font-weight: 700; color: #334155; line-height: 1.4; }
+  .vb-compare-row.truth .vb-compare-q { color: #f1f5f9; }
+
+  .vb-steps { display: flex; align-items: center; gap: 4px; }
+  .vb-step-item { flex: 1; text-align: center; }
+  .vb-step-box {
+    background: #f8fafc; border: 1.5px solid #e2e8f0;
+    border-radius: 10px; padding: 10px 6px; margin-bottom: 6px;
+  }
+  .vb-step-item.active .vb-step-box { background: #3b82f6; border-color: #3b82f6; }
+  .vb-step-box-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .vb-step-box-label { font-size: 10px; font-weight: 700; color: #475569; }
+  .vb-step-item.active .vb-step-box-label { color: #fff; }
+  .vb-step-sub2 { font-size: 9.5px; color: #94a3b8; line-height: 1.4; }
+  .vb-arrow { font-size: 14px; color: #cbd5e1; flex-shrink: 0; margin-bottom: 20px; }
+
+  /* ================================================
+     VARIANT C — 텍스트 상단 + 이미지 하단 몰입 전환
+     ================================================ */
+  .vc {
+    max-width: 430px;
+    margin: 0 auto 80px;
+    background: #fafaf8;
+    overflow: hidden;
+  }
+
+  .vc-top { padding: 32px 24px 0; }
+  .vc-eyebrow {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  }
+  .vc-line { height: 2px; width: 24px; background: #111; }
+  .vc-eyebrow-text { font-size: 10px; font-weight: 700; letter-spacing: 3px; color: #111; }
+
+  .vc-main-title {
+    font-size: 30px; font-weight: 900;
+    font-family: 'Noto Serif KR', serif;
+    color: #111; line-height: 1.25; margin-bottom: 16px;
+  }
+  .vc-main-title .underline {
+    position: relative; display: inline;
+  }
+  .vc-main-title .underline::after {
+    content: '';
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    height: 8px; background: rgba(234,179,8,0.35);
+    z-index: -1; border-radius: 2px;
+  }
+  .vc-desc { font-size: 13.5px; color: #555; line-height: 1.75; margin-bottom: 28px; }
+
+  .vc-vs-block {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 28px;
+  }
+  .vc-panel { border-radius: 12px; padding: 18px 14px; position: relative; overflow: hidden; }
+  .vc-panel.myth { background: #fff; border: 1.5px solid #e5e7eb; }
+  .vc-panel.truth { background: #111; border: 1.5px solid #111; }
+  .vc-panel-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .vc-panel-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .vc-panel.myth .vc-panel-label { color: #9ca3af; }
+  .vc-panel.truth .vc-panel-label { color: #fbbf24; }
+  .vc-panel-text { font-size: 13px; font-weight: 700; line-height: 1.5; }
+  .vc-panel.myth .vc-panel-text { color: #6b7280; }
+  .vc-panel.truth .vc-panel-text { color: #fff; }
+  .vc-panel.myth::before { content: '✕'; position: absolute; top: 10px; right: 12px; font-size: 18px; color: #e5e7eb; font-weight: 900; }
+  .vc-panel.truth::before { content: '✓'; position: absolute; top: 10px; right: 12px; font-size: 18px; color: rgba(251,191,36,0.3); font-weight: 900; }
+
+  .vc-img-wrap { position: relative; height: 220px; overflow: hidden; }
+  .vc-img {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .vc-img::before {
+    content: ''; position: absolute; top: -40px; left: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .vc-img::after {
+    content: ''; position: absolute; bottom: -60px; right: -40px;
+    width: 250px; height: 250px; border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .vc-img-center { position: relative; z-index: 1; text-align: center; }
+  .vc-img-emoji { font-size: 72px; display: block; margin-bottom: 8px; }
+  .vc-img-caption {
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 4px 14px; border-radius: 100px;
+  }
+  .vc-img-top-overlay {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, #fafaf8, transparent);
+  }
+
+  .vc-steps-wrap { background: #111; padding: 20px 24px; }
+  .vc-steps-title {
+    font-size: 10px; color: rgba(255,255,255,0.4);
+    letter-spacing: 2px; font-weight: 700; margin-bottom: 16px;
+  }
+  .vc-flow { display: flex; align-items: center; gap: 8px; }
+  .vc-flow-item { flex: 1; text-align: center; }
+  .vc-flow-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1.5px solid #2d2d2d;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin: 0 auto 7px; background: #1a1a1a;
+  }
+  .vc-flow-item.hot .vc-flow-circle {
+    border-color: #fbbf24; background: rgba(251,191,36,0.1);
+    box-shadow: 0 0 16px rgba(251,191,36,0.2);
+  }
+  .vc-flow-name { font-size: 10.5px; color: #6b7280; font-weight: 600; }
+  .vc-flow-item.hot .vc-flow-name { color: #fbbf24; }
+  .vc-flow-tag { font-size: 9px; color: #374151; margin-top: 2px; }
+  .vc-flow-arr { font-size: 12px; color: #2d2d2d; flex-shrink: 0; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<!-- VARIANT A -->
+<div class="label-wrap">
+  <div class="label-badge">변형 A</div>
+  <div class="label-desc">이미지 상단 풀 히어로 + 레드 강조 대비</div>
+</div>
+
+<div class="va">
+  <div class="va-hero">
+    <div class="va-img">
+      <div class="va-ribbon">ROOT CAUSE</div>
+      <div class="va-img-inner">
+        <span class="va-emoji">👟</span>
+        <span class="va-img-label">제품 / 상황 이미지</span>
+      </div>
+    </div>
+    <div class="va-overlay"></div>
+  </div>
+  <div class="va-content">
+    <div class="va-tag">THE ROOT CAUSE</div>
+    <h2 class="va-title">원인은 <em>'전시 동선'</em> 부재</h2>
+    <p class="va-desc">더 큰 장식장, 더 많은 선반을 사봤지만 결국 정리하는 시간만 늘어날 뿐입니다.</p>
+    <div class="va-vs">
+      <div class="va-card x">
+        <div class="va-card-tag">✕ 일반적인 생각</div>
+        <div class="va-card-text">"자리가 부족해서 정리가 안 되는 거야"</div>
+      </div>
+      <div class="va-vs-mid"><div class="va-vs-badge">VS</div></div>
+      <div class="va-card o">
+        <div class="va-card-tag">✓ 진짜 핵심 원인</div>
+        <div class="va-card-text">"전시 동선이 없어서 방치되는 거야"</div>
+      </div>
+    </div>
+    <div class="va-steps">
+      <div class="va-step">
+        <div class="va-step-dot">😤</div>
+        <div class="va-step-name">불편한 개봉</div>
+        <div class="va-step-sub">"꺼내기 너무 힘들다"</div>
+      </div>
+      <div class="va-step hot">
+        <div class="va-step-dot">📦</div>
+        <div class="va-step-name">박스행 결정</div>
+        <div class="va-step-sub">"그냥 넣어두자"</div>
+      </div>
+      <div class="va-step">
+        <div class="va-step-dot">😶</div>
+        <div class="va-step-name">전시 포기</div>
+        <div class="va-step-sub">"포기하게 됐다"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT B -->
+<div class="label-wrap">
+  <div class="label-badge">변형 B</div>
+  <div class="label-desc">이미지 왼쪽 고정 + 블루 사이드 스트라이프</div>
+</div>
+
+<div class="vb">
+  <div class="vb-split">
+    <div class="vb-img-col">
+      <span class="vb-img-emoji">👟</span>
+      <div class="vb-img-tag">제품 이미지</div>
+    </div>
+    <div class="vb-right-col">
+      <div class="vb-badge">🔍 THE ROOT CAUSE</div>
+      <h2 class="vb-title">원인은<br><em>'전시 동선'</em> 부재</h2>
+      <p class="vb-desc">더 큰 장식장, 더 많은 선반을 사봤지만 결국 정리하는 시간만 늘어날 뿐입니다.</p>
+    </div>
+  </div>
+  <div class="vb-divider"></div>
+  <div class="vb-body">
+    <div class="vb-compare">
+      <div class="vb-compare-row">
+        <div class="vb-compare-icon">🙅</div>
+        <div class="vb-compare-text">
+          <div class="vb-compare-label">✕ 일반적인 생각</div>
+          <div class="vb-compare-q">"자리가 부족해서 정리가 안 되는 거야"</div>
+        </div>
+      </div>
+      <div class="vb-compare-row truth">
+        <div class="vb-compare-icon">💡</div>
+        <div class="vb-compare-text">
+          <div class="vb-compare-label">✓ 진짜 핵심 원인</div>
+          <div class="vb-compare-q">"전시 동선이 없어서 방치되는 거야"</div>
+        </div>
+      </div>
+    </div>
+    <div class="vb-steps">
+      <div class="vb-step-item">
+        <div class="vb-step-box">
+          <span class="vb-step-box-icon">😤</span>
+          <div class="vb-step-box-label">불편한 개봉</div>
+        </div>
+        <div class="vb-step-sub2">"꺼내기 너무 힘들다"</div>
+      </div>
+      <div class="vb-arrow">›</div>
+      <div class="vb-step-item active">
+        <div class="vb-step-box">
+          <span class="vb-step-box-icon">📦</span>
+          <div class="vb-step-box-label">박스행 결정</div>
+        </div>
+        <div class="vb-step-sub2">"그냥 넣어두자"</div>
+      </div>
+      <div class="vb-arrow">›</div>
+      <div class="vb-step-item">
+        <div class="vb-step-box">
+          <span class="vb-step-box-icon">😶</span>
+          <div class="vb-step-box-label">전시 포기</div>
+        </div>
+        <div class="vb-step-sub2">"포기하게 됐다"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT C -->
+<div class="label-wrap">
+  <div class="label-badge">변형 C</div>
+  <div class="label-desc">텍스트 선 강조 상단 + 이미지 하단 몰입 전환</div>
+</div>
+
+<div class="vc">
+  <div class="vc-top">
+    <div class="vc-eyebrow">
+      <div class="vc-line"></div>
+      <div class="vc-eyebrow-text">THE ROOT CAUSE</div>
+      <div class="vc-line"></div>
+    </div>
+    <h2 class="vc-main-title">원인은 <span class="underline">'전시 동선'</span> 부재</h2>
+    <p class="vc-desc">더 큰 장식장, 더 많은 선반을 사봤지만 결국 정리하는 시간만 늘어날 뿐입니다.</p>
+    <div class="vc-vs-block">
+      <div class="vc-panel myth">
+        <span class="vc-panel-icon">🙅</span>
+        <div class="vc-panel-label">일반적인 생각</div>
+        <div class="vc-panel-text">"자리가 부족해서 정리가 안 되는 거야"</div>
+      </div>
+      <div class="vc-panel truth">
+        <span class="vc-panel-icon">💡</span>
+        <div class="vc-panel-label">진짜 핵심 원인</div>
+        <div class="vc-panel-text">"전시 동선이 없어서 방치되는 거야"</div>
+      </div>
+    </div>
+  </div>
+  <div class="vc-img-wrap">
+    <div class="vc-img-top-overlay"></div>
+    <div class="vc-img">
+      <div class="vc-img-center">
+        <span class="vc-img-emoji">👟</span>
+        <span class="vc-img-caption">제품 / 상황 이미지</span>
+      </div>
+    </div>
+  </div>
+  <div class="vc-steps-wrap">
+    <div class="vc-steps-title">PROBLEM FLOW</div>
+    <div class="vc-flow">
+      <div class="vc-flow-item">
+        <div class="vc-flow-circle">😤</div>
+        <div class="vc-flow-name">불편한 개봉</div>
+        <div class="vc-flow-tag">"꺼내기 힘들다"</div>
+      </div>
+      <div class="vc-flow-arr">›</div>
+      <div class="vc-flow-item hot">
+        <div class="vc-flow-circle">📦</div>
+        <div class="vc-flow-name">박스행 결정</div>
+        <div class="vc-flow-tag">"그냥 넣어두자"</div>
+      </div>
+      <div class="vc-flow-arr">›</div>
+      <div class="vc-flow-item">
+        <div class="vc-flow-circle">😶</div>
+        <div class="vc-flow-name">전시 포기</div>
+        <div class="vc-flow-tag">"포기하게 됐다"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:60px; background:#e8e8e8;"></div>
+</body>
+</html>
